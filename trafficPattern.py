@@ -11,6 +11,6 @@ traffic_pattern = "uniform"  #uniform, reversal, matrix, neighbor, shuffle, butt
 degree = 5
 nodes = 16  #number of nodes
 
-archive = "result_mkpkt-huyao/" + traffic_pattern + "-" + str(nodes) + "-trim2.txt"
+archive = "tp/" + traffic_pattern + "-" + str(nodes) + "-trim2.txt"
 names = ["src", "dst"]
 data = pd.read_csv(archive, comment=";", sep="\s+", names=names)

@@ -12,7 +12,10 @@ $ sudo pip install pandas networkx
 ```
 
 ## Run
-It is simple, right?
+```shell
+$ python nwGen.py -f <inputfile> -n <nodes> -d <degree>
+```
+Or you can edit your configuration in [trafficPattern.py](trafficPattern.py) and simply run
 ```shell
 $ python nwGen.py
 ```
