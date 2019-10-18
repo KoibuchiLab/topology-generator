@@ -9,6 +9,27 @@ import algorithm                        # algorithms including modified dijkstra
 import trafficPattern as tp            # generator of traffic pattern
 import datetime                         # output
 import networkx as nx   
+import sys, getopt
+
+def main(argv):
+    # self-defined traffic pattern
+    inputfile = ''
+    try:
+        opts, args = getopt.getopt(argv, "hi:",["ifile="])
+    except getopt.GetoptError:
+        # print 'test.py -i <inputfile>'
+        # sys.exit(2)
+        return 0
+    for opt, arg in opts:
+        if opt == '-h':
+            print 'test.py -i <inputfile>'
+            sys.exit()
+        elif opt in ("-i", "--ifile"):
+            inputfile = arg
+    tp.archive = inputfile
+
+if __name__ == "__main__":
+   main(sys.argv[1:])    
 
 traffic_pattern = tp.traffic_pattern
 degree = tp.degree  # network degree
@@ -55,6 +76,13 @@ while partition:
             partition = False
     sw_bp = sw
     #print sw_bp
+
+print "sw_node1: " + str(sw_node)
+# switch id = node id (one node per switch)
+for i in range(len(sw_node)):
+    sw_node[i] = []
+    sw_node[i].append(i)
+print "sw_node2: " + str(sw_node)
     
 # print "=============================================== after switch partition ==============================================="                
 # print "sw_node: " + str(sw_node)
@@ -164,4 +192,4 @@ for i in range(len(sw_sw)):                             # i --> src_sw
             for k in range(len(sw_sw[sw_sw[i][j]])):
                 if sw_sw[sw_sw[i][j]][k] == i:
                     f.write(str(sw_sw[i][j]) + " " + str(k+1) + "\n")   # k+1 --> dst_port, 0 is retained for localhost
-f.close()           
+f.close()   
