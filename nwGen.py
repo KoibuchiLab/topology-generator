@@ -10,6 +10,7 @@ import trafficPattern as tp            # generator of traffic pattern
 import datetime                         # output
 import networkx as nx   
 import sys, getopt
+import pandas as pd
 
 def main(argv):
     # self-defined traffic pattern
@@ -97,11 +98,12 @@ def main(argv):
     edges = algorithm.get_edges(topo)    
 
     # optimize topology according to traffic pattern
-    data = tp.data  # read data flows
+    # data = tp.data  # read data flows
+    data = pd.read_csv(archive, comment=";", sep="\s+", names=["src", "dst"])
     num_dataflow = len(data)
     src_dst = {}    # num: (src, dst)
     for i in range(num_dataflow):
-        src_dst[i] = (data["src"][i], data["dst"][i])
+        src_dst[i] = (data["src"][i], data["dst"][i])  
     src_dst_sw = algorithm.get_src_dst_sw(src_dst, sw_node) # node pair --> switch pair
     # print "src_dst: ", str(src_dst)
     # print "src_dst_sw: ", str(src_dst_sw)
